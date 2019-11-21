@@ -68,6 +68,7 @@
 <br/>
 При ручном вводе данных код данной функции будет выглядеть так: 
 ```
+c++
     #include <iostream>
     #include <math.h>
     #include <stdio.h>
@@ -98,6 +99,7 @@
 
 <br/>Так как нам задали параметры в тз наш код будет выглядеть так:
 ```
+c++
     #include <iostream>
     #include <math.h>
     #include <stdio.h>
