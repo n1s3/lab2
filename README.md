@@ -67,8 +67,7 @@
 Дана функция <br/> ![](png/2.png "рис.1 функция")
 <br/>
 При ручном вводе данных код данной функции будет выглядеть так: 
-```
-c++
+```c++
     #include <iostream>
     #include <math.h>
     #include <stdio.h>
@@ -87,19 +86,18 @@ c++
 	    cin >> b;
     for (double x1 = x1; x1 <= x2; x1+=dx){
 
-	    if (x1 < a && x1-a < 1e-10) { z = exp(x1) / (3 + sin(x1)); }
+	    if (x1 < a && abs(x1-a) < 1e-9) { z = exp(x1) / (3 + sin(x1)); }
 
 	    else if (a < x1 && x1 < b) { z = log(x1) + pow(x1, 2); }
 
-	    else if (x1 > b && b-x < 1e-10) { z = 1 + sin(-x1); }
+	    else if (x1 >= b) { z = 1 + sin(-x1); }
 
     cout << "\nx = " << x1;
 	cout << "\nz = " << z; } }
 ```
 
-<br/>Так как нам задали параметры в тз наш код будет выглядеть так:
-```
-c++
+<br/>Так как нам задали параметры в тз наш код будет иметь два вида:
+```c++
     #include <iostream>
     #include <math.h>
     #include <stdio.h>
@@ -111,7 +109,8 @@ c++
 	    b = 1.2;
 	    for (double x = 0.5; x <= 1.51; x+=0.05)
 	    {
-		    if (x < a && x-a < 1e-10)
+	            x = round(x * 100) / 100; 
+		    if (x <= a )
 		    {
 			    z = exp(x) / (3 + sin(x)); 
 		    }
@@ -119,7 +118,31 @@ c++
 		    { 
 			    z = log(x) + pow(x, 2);
 		    }
-		    else if (x > b && b-x < 1e-10)
+		    else if (x >= b)
+		    {
+			    z = 1 + sin(-x);
+		    }
+		    cout << "\nx = " << x;
+		    cout << "\nz = " << z;
+	    }
+    }
+    int main()
+    {
+	    double x, a, b, z;
+	    a = 0.7;
+	    b = 1.2;
+	    double eps = 1e-9;
+	    for (double x = 0.5; x <= 1.5 + eps; x+=0.05)
+	    {
+		    if (x <= a || abs(a-x) < eps)
+		    {
+			    z = exp(x) / (3 + sin(x)); 
+		    }
+		    else if (x > a && x < b) 
+		    { 
+			    z = log(x) + pow(x, 2);
+		    }
+		    else if (x >= b)
 		    {
 			    z = 1 + sin(-x);
 		    }
